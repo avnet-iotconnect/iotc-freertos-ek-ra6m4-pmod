@@ -7,30 +7,30 @@
 /* Telemetry grabber & command handler code
  */
 
-static inline bool stringStartsWith(const char *fullString, const char *toCheck) {
+static inline bool string_starts_with(const char *fullString, const char *toCheck) {
     return strncmp(toCheck, fullString, strlen(toCheck)) == 0;
 }
 
-static inline bool commandHasParams(const da16k_cmd_t *cmd) {
+static inline bool command_has_params(const da16k_cmd_t *cmd) {
     return cmd->parameters != NULL;
 }
 
-static void iotcDemoHandleCommand(const da16k_cmd_t *cmd) {
+static void iotc_demo_handle_command(const da16k_cmd_t *cmd) {
     /* All commands we know need parameters. */
 
-    if (!commandHasParams(cmd)) {
+    if (!command_has_params(cmd)) {
         DA16K_PRINT("ERROR: Command '%s' needs a parameter!\r\n");
         return;
     }
 
-    if        (stringStartsWith(cmd->command, "set_led_frequency")) {
+    if        (string_starts_with(cmd->command, "set_led_frequency")) {
         set_led_frequency((uint16_t) atoi(cmd->parameters));
 
-    } else if (stringStartsWith(cmd->command, "set_red_led")) {
+    } else if (string_starts_with(cmd->command, "set_red_led")) {
 
-        if        (stringStartsWith(cmd->parameters, "on")) {
+        if        (string_starts_with(cmd->parameters, "on")) {
             TURN_RED_ON
-        } else if (stringStartsWith(cmd->parameters, "off")) {
+        } else if (string_starts_with(cmd->parameters, "off")) {
             TURN_RED_OFF
         } else {
             DA16K_PRINT("ERROR: unknown parameter for %s\r\n", cmd->command);
@@ -59,10 +59,10 @@ void iotc_demo_thread_entry(void *pvParameters) {
         da16k_cmd_t currentCmd = {0};
         float cpuTemp = 0.0;
 
-        err = da16k_getCmd(&currentCmd);
+        err = da16k_get_cmd(&currentCmd);
 
         if (currentCmd.command) {
-            iotcDemoHandleCommand(&currentCmd);
+            iotc_demo_handle_command(&currentCmd);
         }
 
         if (err == DA16K_SUCCESS) {
