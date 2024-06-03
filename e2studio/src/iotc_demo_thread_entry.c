@@ -50,23 +50,24 @@ static void iotc_demo_handle_command(const da16k_cmd_t *cmd) {
 void iotc_demo_thread_entry(void *pvParameters) {
     FSP_PARAMETER_NOT_USED (pvParameters);
 
-    da16k_cfg_t da16kConfig;
-    da16k_err_t err = da16k_init(&da16kConfig);
+    da16k_cfg_t da16k_config;
+    da16k_err_t err = da16k_init(&da16k_config);
 
     assert(err == DA16K_SUCCESS);
 
     while (1) {
-        da16k_cmd_t currentCmd = {0};
+        da16k_cmd_t current_cmd = {0};
         float cpuTemp = 0.0;
 
-        err = da16k_get_cmd(&currentCmd);
+        err = da16k_get_cmd(&current_cmd);
 
-        if (currentCmd.command) {
-            iotc_demo_handle_command(&currentCmd);
+        if (current_cmd.command) {
+            iotc_demo_handle_command(&current_cmd);
+            da16k_destroy_cmd(current_cmd);
         }
 
         if (err == DA16K_SUCCESS) {
-            DA16K_PRINT("Command received: %s, parameters: %s\r\n", currentCmd.command, currentCmd.parameters ? currentCmd.parameters : "<none>" );
+            DA16K_PRINT("Command received: %s, parameters: %s\r\n", current_cmd.command, current_cmd.parameters ? current_cmd.parameters : "<none>" );
         }
 
         /* obtain sensor data */
@@ -74,7 +75,6 @@ void iotc_demo_thread_entry(void *pvParameters) {
         cpuTemp = get_cpu_temperature();
 
         da16k_send_float("cpu_temperature", cpuTemp);
-
 
         vTaskDelay(pdMS_TO_TICKS(5000));
     }
