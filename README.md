@@ -19,6 +19,14 @@ Follow the [DA16K AT Interface Quick Start guide.](https://github.com/avnet-iotc
 [Renesas EK-RA6M4](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/ra-cortex-m-mcus/ek-ra6m4-evaluation-kit-ra6m4-mcu-group) with [DA16600 Wi-Fi-BLE combo module](https://www.renesas.com/us/en/products/wireless-connectivity/wi-fi/low-power-wi-fi/da16600mod-ultra-low-power-wi-fi-bluetooth-low-energy-combo-modules-battery-powered-iot-devices).
 
 
+## Getting Started
+
+Follow the [Renesas EK-RA6M4 Quick Start Guide](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/ra-cortex-m-mcus/ek-ra6m4-evaluation-kit-ra6m4-mcu-group#documents) to set up your EK-RA6M4 board for use.
+
+**Make sure the DA16x00 device is connected to the PMOD1 connector.**
+
+**Follow the [Quickstart Guide](./QUICKSTART.md) to flash the included binary image and use it.**
+
 ## Supported IoTC Device Commands
 
 You can add these to your device template in the IoTConnect Dashboard.
@@ -39,12 +47,11 @@ You can add these to your device template in the IoTConnect Dashboard.
     * `2` - Fast blinking
     * `3` - Very fast blinking
 
-## Instructions
-
-Follow the [Renesas EK-RA6M4 Quick Start Guide](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/ra-cortex-m-mcus/ek-ra6m4-evaluation-kit-ra6m4-mcu-group#documents) to set up your EK-RA6M4 board for use.
+## Building & Development
 
 Install the [Flexible Software Package with e² Studio IDE](https://www.renesas.com/us/en/software-tool/flexible-software-package-fsp).
 
 The project is tested and built with FSP version 5.0.0, but it may work with later 5.x.x versions.
 
 You can now open / import, build and debug the project as per the Renesas Quick Start guide.
+Install the [e² Studio IDE](https://www.renesas.com/us/en/software-tool/e-studio).
