@@ -57,6 +57,7 @@ void iotc_demo_thread_entry(void *pvParameters) {
 
     while (1) {
         da16k_cmd_t current_cmd = {0};
+        da16k_msg_t *current_msg = NULL;
         float cpuTemp = 0.0;
 
         err = da16k_get_cmd(&current_cmd);
@@ -74,7 +75,9 @@ void iotc_demo_thread_entry(void *pvParameters) {
 
         cpuTemp = get_cpu_temperature();
 
-        da16k_send_float("cpu_temperature", cpuTemp);
+        current_msg = da16k_create_msg_float("cpu_temperature", cpuTemp);
+        da16k_send_msg(current_msg);
+        da16k_destroy_msg(current_msg);
 
         vTaskDelay(pdMS_TO_TICKS(5000));
     }
