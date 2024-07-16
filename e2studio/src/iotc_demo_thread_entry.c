@@ -74,7 +74,7 @@ void iotc_demo_thread_entry(void *pvParameters) {
 
         cpuTemp = get_cpu_temperature();
 
-        da16k_send_float("cpu_temperature", cpuTemp);
+        err = da16k_send_msg_direct_float("cpu_temperature", cpuTemp);
 
         vTaskDelay(pdMS_TO_TICKS(5000));
     }
