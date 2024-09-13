@@ -10,4 +10,7 @@ e2studio/*.log
 e2studio/.secure_*
 e2studio/*.pincfg
 
+e2studio/cert/*.h
+e2studio/cert/*.pem
+
 .vscode

@@ -607,7 +607,7 @@
     <module id="module.freertos.heap.4.1419833664"/>
     <module id="module.driver.uart_on_sci_uart.1248249823">
       <property id="module.driver.uart.name" value="g_uart0"/>
-      <property id="module.driver.uart.channel" value="0"/>
+      <property id="module.driver.uart.channel" value="9"/>
       <property id="module.driver.uart.data_bits" value="module.driver.uart.data_bits.data_bits_8"/>
       <property id="module.driver.uart.parity" value="module.driver.uart.parity.parity_off"/>
       <property id="module.driver.uart.stop_bits" value="module.driver.uart.stop_bits.stop_bits_1"/>
@@ -721,7 +721,7 @@
     <context id="rtos.awsfreertos.thread.653239043">
       <property id="_symbol" value="iotc_demo_thread"/>
       <property id="rtos.awsfreertos.thread.name" value="IoTCDemo"/>
-      <property id="rtos.awsfreertos.thread.stack" value="1024"/>
+      <property id="rtos.awsfreertos.thread.stack" value="4096"/>
       <property id="rtos.awsfreertos.thread.priority" value="1"/>
       <property id="rtos.awsfreertos.thread.context" value="NULL"/>
       <property id="rtos.awsfreertos.thread.allocation" value="rtos.awsfreertos.thread.allocation.static"/>

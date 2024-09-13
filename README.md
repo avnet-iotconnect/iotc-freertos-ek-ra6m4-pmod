@@ -19,14 +19,6 @@ Follow the [DA16K AT Interface Quick Start guide.](https://github.com/avnet-iotc
 [Renesas EK-RA6M4](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/ra-cortex-m-mcus/ek-ra6m4-evaluation-kit-ra6m4-mcu-group) with [DA16600 Wi-Fi-BLE combo module](https://www.renesas.com/us/en/products/wireless-connectivity/wi-fi/low-power-wi-fi/da16600mod-ultra-low-power-wi-fi-bluetooth-low-energy-combo-modules-battery-powered-iot-devices).
 
 
-## Getting Started
-
-Follow the [Renesas EK-RA6M4 Quick Start Guide](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/ra-cortex-m-mcus/ek-ra6m4-evaluation-kit-ra6m4-mcu-group#documents) to set up your EK-RA6M4 board for use.
-
-**Make sure the DA16x00 device is connected to the PMOD1 connector.**
-
-**Follow the [Quickstart Guide](./QUICKSTART.md) to flash the included binary image and use it.**
-
 ## Supported IoTC Device Commands
 
 You can add these to your device template in the IoTConnect Dashboard.
@@ -47,10 +39,54 @@ You can add these to your device template in the IoTConnect Dashboard.
     * `2` - Fast blinking
     * `3` - Very fast blinking
 
-## Building & Development
+## Getting Started
 
-Install the [Flexible Software Package with e² Studio IDE](https://www.renesas.com/us/en/software-tool/flexible-software-package-fsp).
+Follow the [Renesas EK-RA6M4 Quick Start Guide](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/ra-cortex-m-mcus/ek-ra6m4-evaluation-kit-ra6m4-mcu-group#documents) to set up your EK-RA6M4 board for use.
+
+**Make sure the DA16x00 device is connected to the PMOD1 connector.**
+
+**Follow the [Quickstart Guide](./QUICKSTART.md) to flash the included binary image and use it.**
+
+# Building & Development
+
+* Install **Python 3.8 or higher**
+* Install the [Flexible Software Package with e² Studio IDE](https://www.renesas.com/us/en/software-tool/flexible-software-package-fsp).
 
 The project is tested and built with FSP version 5.0.0, but it may work with later 5.x.x versions.
 
 You can now open / import, build and debug the project as per the Renesas Quick Start guide.
+
+## Enabling Automatic IoTConnect / Device Configuration
+
+The underlying ATCMD library can configure the device automatically using certain APIs.
+
+**This allows you to skip manual configuration of the DA16xxx PMOD device** (you are, however, still required to flash the firmware on it.)
+
+The file `iotc_demo_thread_entry.c` contains definitions for these:
+
+* Define `DA16K_IOTC_CONFIG_USED` in the project to use custom IoTConnect configuration parameters
+* Define `DA16K_WIFI_CONFIG_USED` in the project to use custom WiFi configuration parameters
+
+`DA16K_IOTC_AWS` may be replaced with `DA16K_IOTC_AZURE` to fit your environment.
+
+![](assets/cfgdef.png)
+
+### Adding a Device Client Certificate / Private Key for Testing
+
+**NOTE: This requires a custom IOTC Configuration via `DA16K_IOTC_CONFIG_USED` to work (see above)!**
+
+You may place device client certificate and private key files in the PEM format into the **`e2studio/cert/`** directory.
+
+The file names must be:
+
+* `device_cert.pem` (client cert)
+* `device_key.pem` (private key)
+
+There is an automatic pre-build step in the form of a python script, `/util/pre_build.py`. which generates a header file from these.
+
+---
+***WARNING:***
+
+***CLIENT CERTIFICATE TRANSMISSION IS INSECURE AND THE FUNCTIONALITY IS ONLY PROVIDED FOR TESTING PURPOSES.*** 
+
+---
